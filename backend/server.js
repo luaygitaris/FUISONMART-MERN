@@ -12,13 +12,7 @@ const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(
-	cors({
-		origin: [
-			'https://vercel.com/luay-bachtiar-rifais-projects/fuisonmart-mern',
-		],
-		methods: ['POST', 'GET'],
-		credentials: true,
-	})
+	cors()
 );
 
 connectDB();
@@ -31,9 +25,9 @@ app.get('/', (req, res) => {
 	res.send('API Working');
 });
 
-export default (req, res) => {
-	app(req, res); // Pass the request and response to Express
-};
+// export default (req, res) => {
+// 	app(req, res); // Pass the request and response to Express
+// };
 
 app.listen(port, () => {
 	console.log(`Server started on http://localhost:${port}`);
