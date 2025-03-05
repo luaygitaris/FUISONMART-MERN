@@ -8,6 +8,7 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 
 const app = express();
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(
@@ -34,6 +35,6 @@ export default (req, res) => {
 	app(req, res); // Pass the request and response to Express
 };
 
-// app.listen(port, () => {
-// 	console.log(`Server started on http://localhost:${port}`);
-// });
+app.listen(port, () => {
+	console.log(`Server started on http://localhost:${port}`);
+});
