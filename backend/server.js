@@ -12,7 +12,13 @@ const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(
-	cors()
+	cors({
+		origin: [
+			'https://vercel.com/luay-bachtiar-rifais-projects/fuisonmart-mern-frontend',
+		],
+		methods: ['POST', 'GET'],
+		credentials: true,
+	})
 );
 
 connectDB();
