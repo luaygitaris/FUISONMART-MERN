@@ -10,10 +10,16 @@ import orderRouter from './routes/orderRoute.js';
 
 
 const app = express();
-const port = 4000;
+// const port = 4000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+	{
+		origin: ["https://vercel.com/luay-bachtiar-rifais-projects/fuisonmart-mern"],
+		methods: ["POST", "GET"],
+		credentials: true
+	}
+));
 
 connectDB()
 
