@@ -4,10 +4,19 @@ import {
 	listProduct,
 	removeProduct,
 } from '../controllers/productController.js';
-
+// import multer from 'multer'
 
 const productRouter = express.Router();
 
+// image storage engine
+// const storage = multer.diskStorage({
+//     destination:"uploads",
+//     filename:(req,res,cb)=>{
+//         return cb(null,`${Date.now()}${file.originalname}`)
+//     }
+// })
+
+// const upload = multer({storage:storage})
 
 productRouter.post('/add', addProduct);
 productRouter.get('/list', listProduct);

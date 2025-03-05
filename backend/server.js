@@ -8,18 +8,10 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 4000;
 
 app.use(express.json());
-app.use(
-	cors({
-		origin: [
-			'https://vercel.com/luay-bachtiar-rifais-projects/fuisonmart-mern-frontend',
-		],
-		methods: ['POST', 'GET'],
-		credentials: true,
-	})
-);
+app.use(cors());
 
 connectDB();
 app.use('/api/product', productRouter);
