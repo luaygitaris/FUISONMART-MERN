@@ -13,18 +13,23 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-connectDB();
+// connectDB();
 app.use('/api/product', productRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
+mongoose
+    .connect(process.env.mongoDb)
+    .then(() => console.log('Database is connected'))
+    .catch((error) => console.log(error));
+
 app.get('/', (req, res) => {
 	res.send('API Working');
 });
 
-export default (req, res) => {
-	app(req, res);
-};
+// export default (req, res) => {
+// 	app(req, res);
+// };
 
 app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
