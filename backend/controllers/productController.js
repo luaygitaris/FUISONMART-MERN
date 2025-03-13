@@ -2,31 +2,37 @@ import productModel from '../models/productModel.js';
 import fs from 'fs';
 
 const addProduct = async (req, res) => {
-	// let image_filename = `${req.file.filename}`;
+	const { name, description, price, image, category } = req.body;
+
+	if (!name || !description || !price || !image || !category) {
+		return res.status(400).json({ success: false, message: 'Semua field harus diisi.' });
+	}
 
 	const product = new productModel({
-		name: req.body.name,
-		description: req.body.description,
-		price: req.body.price,
-		category: req.body.category,
-		image: req.body.image,
+		name,
+		description,
+		price,
+		image,
+		category,
 	});
+
 	try {
 		await product.save();
-		res.json({ succes: true, message: 'Product Added' });
+		res.json({ success: true, message: 'Produk berhasil ditambahkan.' });
 	} catch (error) {
 		console.log(error);
-		res.json({ succes: false, message: 'Error' });
+		res.status(500).json({ success: false, message: 'Terjadi kesalahan saat menambahkan produk.' });
 	}
 };
+
 
 const listProduct = async (req, res) => {
 	try {
 		const products = await productModel.find({});
-		res.json({ succes: true, data: products });
+		res.json({ success: true, data: products });
 	} catch (error) {
 		console.log(error);
-		res.json({ succes: false, message: 'Error' });
+		res.json({ success: false, message: 'Error' });
 	}
 };
 
@@ -36,10 +42,10 @@ const removeProduct = async (req, res) => {
 		// fs.unlink(`uploads/${product.image}`, ()=>{})
 
 		await productModel.findByIdAndDelete(req.body.id);
-		res.json({ succes: true, message: 'Product Removed' });
+		res.json({ success: true, message: 'Product Removed' });
 	} catch (error) {
 		console.log(error);
-		res.json({ succes: false, message: 'Error' });
+		res.json({ success: false, message: 'Error' });
 	}
 };
 

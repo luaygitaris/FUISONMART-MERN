@@ -3,7 +3,7 @@ import { FaPlus } from 'react-icons/fa6';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const Add = ({url}) => {
+const Add = ({ url }) => {
 	const [data, setData] = useState({
 		name: '',
 		description: '',
@@ -14,17 +14,11 @@ const Add = ({url}) => {
 	const [imagePreview, setImagePreview] = useState(null);
 
 	const onChangeHandler = (event) => {
-		const name = event.target.name;
-		const value = event.target.value;
+		const { name, value } = event.target;
 
 		if (name === 'image') {
 			setData((prevData) => ({ ...prevData, [name]: value }));
-
-			if (value) {
-				setImagePreview(value);
-			} else {
-				setImagePreview(null);
-			}
+			setImagePreview(value || null);
 		} else {
 			setData((prevData) => ({ ...prevData, [name]: value }));
 		}
@@ -33,17 +27,22 @@ const Add = ({url}) => {
 	const onSubmitHandler = async (event) => {
 		event.preventDefault();
 
-		const formData = new FormData();
-		formData.append('name', data.name);
-		formData.append('description', data.description);
-		formData.append('category', data.category);
-		formData.append('price', Number(data.price));
-		formData.append('image', data.image);
+		// Validasi sederhana di sisi client
+		if (!data.name || !data.price || !data.image || !data.category || !data.description) {
+			toast.error('Harap isi semua field yang diperlukan.');
+			return;
+		}
 
 		try {
-			const response = await axios.post(`${url}/api/product/add`, formData);
-			
-			if (response.data.succes) {
+			const response = await axios.post(`${url}/api/product/add`, {
+				name: data.name,
+				description: data.description,
+				price: Number(data.price),
+				image: data.image,
+				category: data.category,
+			});
+
+			if (response.data.success) {
 				setData({
 					name: '',
 					description: '',
@@ -52,20 +51,17 @@ const Add = ({url}) => {
 					category: 'Men',
 				});
 				setImagePreview(null);
-				toast.success(response.data.message)
+				toast.success(response.data.message);
 			}
 		} catch (error) {
 			console.error('Error submitting data:', error);
-			alert('Terjadi kesalahan saat menambahkan produk.');
+			toast.error('Terjadi kesalahan saat menambahkan produk.');
 		}
 	};
 
 	return (
 		<section className='p-4 sm:p-10 w-4/5 bg-primary/20'>
-			<form
-				onSubmit={onSubmitHandler}
-				className='flex flex-col gap-y-5 max-w-[555px]'
-			>
+			<form onSubmit={onSubmitHandler} className='flex flex-col gap-y-5 max-w-[555px]'>
 				<h4 className='bold-22 pb-2 uppercase'>Products Upload</h4>
 
 				{/* Bagian Preview Gambar */}
@@ -88,6 +84,7 @@ const Add = ({url}) => {
 						onChange={onChangeHandler}
 						value={data.name}
 						name='name'
+						required
 					/>
 				</div>
 				<div className='flex flex-col gap-y-2'>
@@ -99,6 +96,7 @@ const Add = ({url}) => {
 						onChange={onChangeHandler}
 						value={data.image}
 						name='image'
+						required
 					/>
 				</div>
 				<div className='flex flex-col gap-y-2'>
@@ -122,6 +120,7 @@ const Add = ({url}) => {
 							onChange={onChangeHandler}
 							value={data.category}
 							name='category'
+							required
 						>
 							<option value='Men'>Men</option>
 							<option value='Women'>Women</option>
@@ -143,10 +142,7 @@ const Add = ({url}) => {
 						/>
 					</div>
 				</div>
-				<button
-					type='submit'
-					className='btn-dark sm:w-5/12 flexCenter gap-x-2 !py-2 rounded'
-				>
+				<button type='submit' className='btn-dark sm:w-5/12 flexCenter gap-x-2 !py-2 rounded'>
 					<FaPlus />
 					Add Product
 				</button>
