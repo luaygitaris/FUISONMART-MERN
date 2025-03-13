@@ -7,14 +7,16 @@ const List = ({url}) => {
 	const [list, setList] = useState([]);
 
 	const fetchList = async () => {
-		const response = await axios.get(`${url}/api/product/list`);
-		console.log(response.data);
+		// const response = await axios.get(`${url}/api/product/list`);
+		// console.log(response.data);
 
-		if (response.data.success) {
-			setList(response.data.data);
-		} else {
-			toast.error('Error');
-		}
+		// if (response.data.success) {
+		// 	setList(response.data.data);
+		// } else {
+		// 	toast.error('Error');
+		// }
+		const response = await axios.get(url + '/api/product/list');
+		setList(response.data.data);
 	};
 
 	const removeProduct = async (productId) => {
