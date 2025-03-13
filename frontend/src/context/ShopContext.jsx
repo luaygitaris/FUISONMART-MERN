@@ -5,7 +5,7 @@ export const ShopContext = createContext(null);
 
 const ShopContextProvider = (props) => {
 	const [cartItems, setCartItems] = useState({});
-	const url = 'https://fuisonmart-mern-backend-7np43s4ui-luay-bachtiar-rifais-projects.vercel.app/';
+	const url = 'http://localhost:4000';
 	const [token, setToken] = useState('');
 	const [all_products, setAll_products] = useState([]);
 
