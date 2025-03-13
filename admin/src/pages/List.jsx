@@ -20,7 +20,7 @@ const List = ({url}) => {
 	};
 
 	const removeProduct = async (productId) => {
-		const response = await axios.post(`${url}/api/product/remove`, {id:productId})
+		const response = await axios.post(url + '/api/product/list', {id:productId})
 		await fetchList()
 		if (response.data.success) {
 			toast.success(response.data.message)
