@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import {TbTrash} from 'react-icons/tb'
+import { TbTrash } from 'react-icons/tb';
 
-const List = ({url}) => {
+const List = ({ url }) => {
 	const [list, setList] = useState([]);
 
 	const fetchList = async () => {
@@ -20,14 +20,16 @@ const List = ({url}) => {
 	};
 
 	const removeProduct = async (productId) => {
-		const response = await axios.post(url + '/api/product/list', {id:productId})
-		await fetchList()
+		const response = await axios.post(url + '/api/product/remove', {
+			id: productId,
+		});
+		await fetchList();
 		if (response.data.success) {
-			toast.success(response.data.message)
+			toast.success(response.data.message);
 		} else {
-			toast.error("error")
+			toast.error('error');
 		}
-	}
+	};
 
 	useEffect(() => {
 		fetchList();
@@ -48,7 +50,10 @@ const List = ({url}) => {
 					</thead>
 					<tbody>
 						{list.map((product) => (
-							<tr key={product._id} className='border-b border-slate-900/20 text-gray-50 p-6 medium-14 text-left'>
+							<tr
+								key={product._id}
+								className='border-b border-slate-900/20 text-gray-50 p-6 medium-14 text-left'
+							>
 								<td className='p-1'>
 									<img
 										src={product.image}
@@ -64,7 +69,7 @@ const List = ({url}) => {
 								<td className='p-1'>${product.price}</td>
 								<td className='p-1'>
 									<div className='bold-22'>
-										<TbTrash onClick={()=>removeProduct(product._id)}/>
+										<TbTrash onClick={() => removeProduct(product._id)} />
 									</div>
 								</td>
 							</tr>
