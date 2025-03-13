@@ -7,6 +7,7 @@ import userRouter from './routes/userRoute.js';
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import { config } from 'dotenv';
+import mongoose from 'mongoose';
 
 config()
 const app = express();
