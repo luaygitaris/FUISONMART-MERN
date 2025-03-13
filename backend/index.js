@@ -21,7 +21,7 @@ app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
 mongoose
-    .connect(process.env.mongoDb)
+    .connect("mongodb+srv://luaygitaris:user123@cluster0.3cyau.mongodb.net/FusionMartYT")
     .then(() => console.log('Database is connected'))
     .catch((error) => console.log(error));
 
