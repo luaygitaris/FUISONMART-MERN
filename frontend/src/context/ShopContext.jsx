@@ -5,8 +5,8 @@ export const ShopContext = createContext(null);
 
 const ShopContextProvider = (props) => {
 	const [cartItems, setCartItems] = useState({});
-	// const url = 'http://localhost:4002';
-	const url = 'https://fuisonmart-backend.vercel.app';
+	const url = 'http://localhost:4002';
+	// const url = 'https://fuisonmart-backend.vercel.app';
 	const [token, setToken] = useState('');
 	const [all_products, setAll_products] = useState([]);
 
