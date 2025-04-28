@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Menggunakan CORS umum untuk semua origin
 const corsOptions = {
-    origin: '*', // Mengizinkan semua origin
+    origin: "http://localhost:5173", // Atur origin yang diizinkan
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Atur metode HTTP yang diizinkan
     allowedHeaders: ['Content-Type', 'Authorization'], // Atur headers yang diizinkan
 };
