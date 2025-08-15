@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Menggunakan CORS umum untuk semua origin
 const corsOptions = {
-    origin: "https://fuisonmart-mern-frontend.vercel.app/", // Atur origin yang diizinkan
+    origin: "https://fuisonmart-mern-frontend.vercel.app", // Atur origin yang diizinkan
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Atur metode HTTP yang diizinkan
     allowedHeaders: ['Content-Type', 'Authorization', 'token'], // tambahkan 'token'
 };
