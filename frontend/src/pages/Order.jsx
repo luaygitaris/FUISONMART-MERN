@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 
 const Order = () => {
 	const navigate = useNavigate();
-	const { getTotalCartAmount, token, all_products, cartItems, url } =
+	const { getTotalCartAmount, token, all_products, cartItems, url, userId } =
 		useContext(ShopContext);
 	const [data, setData] = useState({
 		firstName: '',
@@ -37,6 +37,7 @@ const Order = () => {
 			}
 		});
 		let orderData = {
+			userId, // tambahkan userId
 			address: data,
 			items: orderItems,
 			amount: getTotalCartAmount() + 2,

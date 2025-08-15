@@ -9,6 +9,7 @@ const ShopContextProvider = (props) => {
 	const url = 'https://backend-coba-two.vercel.app';
 	const [token, setToken] = useState('');
 	const [all_products, setAll_products] = useState([]);
+	const [userId, setUserId] = useState("");
 
 	const addToCart = async (itemId) => {
 		if (!cartItems[itemId]) {
@@ -76,6 +77,9 @@ const ShopContextProvider = (props) => {
 				setToken(localStorage.getItem('token'));
 				await loadCartdata(localStorage.getItem('token'));
 			}
+			if (localStorage.getItem('userId')) {
+				setUserId(localStorage.getItem('userId'));
+			}
 		}
 		loadData();
 	}, []);
@@ -91,6 +95,8 @@ const ShopContextProvider = (props) => {
 		url,
 		token,
 		setToken,
+		userId,
+		setUserId,
 	};
 	return (
 		<ShopContext.Provider value={contextValue}>
