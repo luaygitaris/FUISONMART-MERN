@@ -14,7 +14,7 @@ app.use(express.json());
 const corsOptions = {
     origin: "http://localhost:5173", // Atur origin yang diizinkan
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Atur metode HTTP yang diizinkan
-    allowedHeaders: ['Content-Type', 'Authorization'], // Atur headers yang diizinkan
+    allowedHeaders: ['Content-Type', 'Authorization', 'token'], // tambahkan 'token'
 };
 
 app.use(cors(corsOptions));
@@ -31,6 +31,12 @@ mongoose
 
 app.get('/', (req, res) => {
     res.send('API Working');
+});
+
+// Error handler agar error backend tampil jelas di console dan response
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ error: 'Something went wrong!' });
 });
 
 const PORT = process.env.PORT || 4002;
